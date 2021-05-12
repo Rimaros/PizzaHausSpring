@@ -12,11 +12,12 @@ public class Olives implements Additive {
     private String manufacturer; // производитель Greek, Cyprus, Spain
 
     @Bean
-    public Olives olivesGreekGreen(){
-        return new Olives("Olives","green","'Greek'",1);
+    public Olives olivesGreekGreen() {
+        return new Olives("Olives", "green", "'Greek'", 1);
     }
 
-    public Olives(){}
+    public Olives() {
+    }
 
     public Olives(String name, String color, String manufacturer, int sweetnessLevel) {
         this.name = name;

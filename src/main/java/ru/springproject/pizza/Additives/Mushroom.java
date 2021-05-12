@@ -13,11 +13,12 @@ public class Mushroom implements Additive {
     private int cutDegree; // степень измельчения (1 - листами, 2 - кубиками, 3 - кусочками)
 
     @Bean
-    public Mushroom mushroomRusWhite(){
-        return new Mushroom("Mushrooms","white","'Russia'",1);
+    public Mushroom mushroomRusWhite() {
+        return new Mushroom("Mushrooms", "white", "'Russia'", 1);
     }
 
-    public Mushroom(){}
+    public Mushroom() {
+    }
 
     public Mushroom(String name, String kind, String manufacturer, int cutDegree) {
         this.name = name;

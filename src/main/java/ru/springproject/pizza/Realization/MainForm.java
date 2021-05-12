@@ -130,11 +130,12 @@ public class MainForm implements Form {
     }
 
     @Bean
-    public MainForm form1(){
+    public MainForm form1() {
         return new MainForm();
     }
 
-    public MainForm(){}
+    public MainForm() {
+    }
 
     @Override
     public void show() {
@@ -149,18 +150,18 @@ public class MainForm implements Form {
         finalShow();
     }
 
-    private void startShow1(BufferedReader bufferedReader){
+    private void startShow1(BufferedReader bufferedReader) {
 
     }
 
-    private void startShow(BufferedReader bufferedReader){
+    private void startShow(BufferedReader bufferedReader) {
 
         String orderWord;
         boolean orderFlag = false;
         boolean orderRepeat = false;
 
-        while (!orderFlag){
-            if(orderRepeat) System.out.println("Add Pizza to Order? (yes or no)");
+        while (!orderFlag) {
+            if (orderRepeat) System.out.println("Add Pizza to Order? (yes or no)");
             else System.out.println("Would you like take a pizza? (yes or no)");
 
             try {
@@ -174,7 +175,7 @@ public class MainForm implements Form {
                     checkType(bufferedReader);
                     checkAdditives(bufferedReader);
 
-                } else if(orderWord.equalsIgnoreCase("no")) {
+                } else if (orderWord.equalsIgnoreCase("no")) {
                     orderFlag = true;
                 } else System.out.println("Please change from 'yes' or 'no'!\n");
             } catch (IOException e) {
@@ -183,7 +184,7 @@ public class MainForm implements Form {
         }
     }
 
-    private void checkCount(BufferedReader bufferedReader){
+    private void checkCount(BufferedReader bufferedReader) {
         String enterCount;
         boolean pizzaCountFlag = false;
 
@@ -195,7 +196,7 @@ public class MainForm implements Form {
                 if (enterCount.matches("[0-9]+")) {
                     pizzaCount = Integer.parseInt(enterCount); //преобразовываем строку в число.
                     System.out.println(pizzaCount);
-                    if(pizzaCount>0 && pizzaCount<50) pizzaCountFlag = true;
+                    if (pizzaCount > 0 && pizzaCount < 50) pizzaCountFlag = true;
                     else System.out.println("This count is not correctly!\n");
                 } else System.out.println("It is not number, fool!\n");
 
@@ -205,7 +206,7 @@ public class MainForm implements Form {
         }
     }
 
-    private void checkSize(BufferedReader bufferedReader){
+    private void checkSize(BufferedReader bufferedReader) {
 
         String enterSize;
         boolean pizzaSizeFlag = false;
@@ -218,7 +219,7 @@ public class MainForm implements Form {
                 if (enterSize.matches("[0-9]+")) {
                     pizzaSize = Integer.parseInt(enterSize); //преобразовываем строку в число.
                     System.out.println(pizzaSize);
-                    if(pizzaSize>10 && pizzaSize<50) pizzaSizeFlag = true;
+                    if (pizzaSize > 10 && pizzaSize < 50) pizzaSizeFlag = true;
                     else System.out.println("This size is not correctly!\n");
                 } else System.out.println("It is not pizza size, fool!\n");
 
@@ -229,7 +230,7 @@ public class MainForm implements Form {
         }
     }
 
-    private void checkDoughWidth(BufferedReader bufferedReader){
+    private void checkDoughWidth(BufferedReader bufferedReader) {
 
         boolean pizzaDoughWidthFlag = false;
 
@@ -249,7 +250,7 @@ public class MainForm implements Form {
         }
     }
 
-    private void checkType(BufferedReader bufferedReader){
+    private void checkType(BufferedReader bufferedReader) {
 
         String enterType;
         int changeType;
@@ -269,40 +270,48 @@ public class MainForm implements Form {
                     System.out.println(changeType);
 
                     switch (changeType) {
-                        case 1: carbonaraPizza = carbonaraPizza.carbonaraPizza();
-                                carbonaraPizza.setDoughWidth(enterDoughWidth);
-                                carbonaraPizza.setSize(pizzaSize);
-                                carbonaraPizza.setCount(pizzaCount);
-                                listPizzas.setPizza(carbonaraPizza);
-                                carbonaraPizza.takePizza();
-                                pizzaName = carbonaraPizza.getName(); break;
-                        case 2: huntingPizza = huntingPizza.huntingPizza();
-                                huntingPizza.setDoughWidth(enterDoughWidth);
-                                huntingPizza.setSize(pizzaSize);
-                                huntingPizza.setCount(pizzaCount);
-                                listPizzas.setPizza(huntingPizza);
-                                huntingPizza.takePizza();
-                                pizzaName = huntingPizza.getName(); break;
-                        case 3: margaritaPizza = margaritaPizza.margaritaPizza();
-                                margaritaPizza.setDoughWidth(enterDoughWidth);
-                                margaritaPizza.setSize(pizzaSize);
-                                margaritaPizza.setCount(pizzaCount);
-                                listPizzas.setPizza(margaritaPizza);
-                                margaritaPizza.takePizza();
-                                pizzaName = margaritaPizza.getName(); break;
-                        case 4: meatPizza = meatPizza.meatPizza();
-                                meatPizza.setDoughWidth(enterDoughWidth);
-                                meatPizza.setSize(pizzaSize);
-                                meatPizza.setCount(pizzaCount);
-                                listPizzas.setPizza(meatPizza);
-                                meatPizza.takePizza();
-                                pizzaName = meatPizza.getName(); break;
+                        case 1:
+                            carbonaraPizza = carbonaraPizza.carbonaraPizza();
+                            carbonaraPizza.setDoughWidth(enterDoughWidth);
+                            carbonaraPizza.setSize(pizzaSize);
+                            carbonaraPizza.setCount(pizzaCount);
+                            listPizzas.setPizza(carbonaraPizza);
+                            carbonaraPizza.takePizza();
+                            pizzaName = carbonaraPizza.getName();
+                            break;
+                        case 2:
+                            huntingPizza = huntingPizza.huntingPizza();
+                            huntingPizza.setDoughWidth(enterDoughWidth);
+                            huntingPizza.setSize(pizzaSize);
+                            huntingPizza.setCount(pizzaCount);
+                            listPizzas.setPizza(huntingPizza);
+                            huntingPizza.takePizza();
+                            pizzaName = huntingPizza.getName();
+                            break;
+                        case 3:
+                            margaritaPizza = margaritaPizza.margaritaPizza();
+                            margaritaPizza.setDoughWidth(enterDoughWidth);
+                            margaritaPizza.setSize(pizzaSize);
+                            margaritaPizza.setCount(pizzaCount);
+                            listPizzas.setPizza(margaritaPizza);
+                            margaritaPizza.takePizza();
+                            pizzaName = margaritaPizza.getName();
+                            break;
+                        case 4:
+                            meatPizza = meatPizza.meatPizza();
+                            meatPizza.setDoughWidth(enterDoughWidth);
+                            meatPizza.setSize(pizzaSize);
+                            meatPizza.setCount(pizzaCount);
+                            listPizzas.setPizza(meatPizza);
+                            meatPizza.takePizza();
+                            pizzaName = meatPizza.getName();
+                            break;
                         default:
                             System.out.println("This type of pizza lost!");
                             break;
                     }
                     pizzaTypeFlag = true;
-                } else System.out.println( enterType + " is not correctly type!\n");
+                } else System.out.println(enterType + " is not correctly type!\n");
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -310,7 +319,7 @@ public class MainForm implements Form {
         }
     }
 
-    private void checkAdditives(BufferedReader bufferedReader){
+    private void checkAdditives(BufferedReader bufferedReader) {
 
         String enterAdditives;
         String[] masEnterAdditives;
@@ -334,42 +343,63 @@ public class MainForm implements Form {
                 enterAdditives = bufferedReader.readLine(); //читаем строку с клавиатуры
                 if (enterAdditives.matches("[0-9]") || enterAdditives.contains(";")) {
 
-                    if(enterAdditives.contains("0;") || enterAdditives.contains(";0") || (enterAdditives.contains("0") & enterAdditives.length()==1)){
+                    if (enterAdditives.contains("0;") || enterAdditives.contains(";0") || (enterAdditives.contains("0") & enterAdditives.length() == 1)) {
                         enterAdditives = enterAdditives.replaceAll("[^0]", "");
                     }
 
-                    if(!enterAdditives.contains(";")) masEnterAdditives = new String[]{enterAdditives};
+                    if (!enterAdditives.contains(";")) masEnterAdditives = new String[]{enterAdditives};
                     else masEnterAdditives = enterAdditives.split(";");
 
                     for (String masEnterAdditivesElement : masEnterAdditives) {
                         switch (masEnterAdditivesElement) {
-                            case "0": withOut.takeAdditive();
-                                additiveName = withOut.getName();break;
-                            case "1": olivesGreekGreen.takeAdditive();
-                                additiveName = olivesGreekGreen.getName();break;
-                            case "2": cervelatCognakRound.takeAdditive();
-                                additiveName = cervelatCognakRound.getName();break;
-                            case "3": picklesPcRound.takeAdditive();
-                                additiveName = picklesPcRound.getName();break;
-                            case "4": mushroomRusWhite.takeAdditive();
-                                additiveName = mushroomRusWhite.getName();break;
-                            case "5": boiledSausageDocPieces.takeAdditive();
-                                additiveName = boiledSausageDocPieces.getName();break;
-                            case "6": ketchupHeinz.takeAdditive();
-                                additiveName = ketchupHeinz.getName();break;
-                            case "7": mayonnaiseAinStandart.takeAdditive();
-                                additiveName = mayonnaiseAinStandart.getName();break;
-                            case "8": bellPepperMex.takeAdditive();
-                                additiveName = bellPepperMex.getName();break;
-                            case "9": jalapenaPepperUsa.takeAdditive();
-                                additiveName = jalapenaPepperUsa.getName();break;
+                            case "0":
+                                withOut.takeAdditive();
+                                additiveName = withOut.getName();
+                                break;
+                            case "1":
+                                olivesGreekGreen.takeAdditive();
+                                additiveName = olivesGreekGreen.getName();
+                                break;
+                            case "2":
+                                cervelatCognakRound.takeAdditive();
+                                additiveName = cervelatCognakRound.getName();
+                                break;
+                            case "3":
+                                picklesPcRound.takeAdditive();
+                                additiveName = picklesPcRound.getName();
+                                break;
+                            case "4":
+                                mushroomRusWhite.takeAdditive();
+                                additiveName = mushroomRusWhite.getName();
+                                break;
+                            case "5":
+                                boiledSausageDocPieces.takeAdditive();
+                                additiveName = boiledSausageDocPieces.getName();
+                                break;
+                            case "6":
+                                ketchupHeinz.takeAdditive();
+                                additiveName = ketchupHeinz.getName();
+                                break;
+                            case "7":
+                                mayonnaiseAinStandart.takeAdditive();
+                                additiveName = mayonnaiseAinStandart.getName();
+                                break;
+                            case "8":
+                                bellPepperMex.takeAdditive();
+                                additiveName = bellPepperMex.getName();
+                                break;
+                            case "9":
+                                jalapenaPepperUsa.takeAdditive();
+                                additiveName = jalapenaPepperUsa.getName();
+                                break;
                             default:
-                                System.out.println("This additive - '" + masEnterAdditivesElement + "' for pizza is not correctly!"); break;
+                                System.out.println("This additive - '" + masEnterAdditivesElement + "' for pizza is not correctly!");
+                                break;
                         }
                         listPizzas.getPizzaList().get(pizzaName).setAdditional(additiveName);
                     }
                     pizzaTypeFlag = true;
-                } else System.out.println( enterAdditives + " is not correctly enter!\n");
+                } else System.out.println(enterAdditives + " is not correctly enter!\n");
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -377,20 +407,20 @@ public class MainForm implements Form {
         }
     }
 
-    private void finalShow(){
+    private void finalShow() {
         StringBuilder pizzaOrder = new StringBuilder();
 
         pizzaOrder.append("\nYour order : \n\t");
 
-        if(listPizzas.getPizzaList().isEmpty()) pizzaOrder.append("nothing");
+        if (listPizzas.getPizzaList().isEmpty()) pizzaOrder.append("nothing");
         else {
 
             listPizzas.show();
-            for(String pizzaOrderString : listPizzas.getPizzaList().keySet()){
+            for (String pizzaOrderString : listPizzas.getPizzaList().keySet()) {
                 pizzaOrder.append(listPizzas.getPizzaList().get(pizzaOrderString).getInfo())
                         .append("; \n\t");
             }
-            pizzaOrder.replace(pizzaOrder.lastIndexOf(";"),pizzaOrder.lastIndexOf(";")+1,".");
+            pizzaOrder.replace(pizzaOrder.lastIndexOf(";"), pizzaOrder.lastIndexOf(";") + 1, ".");
         }
         System.out.println(pizzaOrder.toString());
     }

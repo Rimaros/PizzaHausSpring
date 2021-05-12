@@ -12,11 +12,12 @@ public class JalapenaPepper implements Additive {
     private int spiceLevel; // уровень остроты
 
     @Bean
-    public JalapenaPepper jalapenaPepperUsa(){
-        return new JalapenaPepper("Jalapena pepper","USA Company",7);
+    public JalapenaPepper jalapenaPepperUsa() {
+        return new JalapenaPepper("Jalapena pepper", "USA Company", 7);
     }
 
-    public JalapenaPepper(){}
+    public JalapenaPepper() {
+    }
 
     public JalapenaPepper(String name, String manufacturer, int spiceLevel) {
         this.name = name;

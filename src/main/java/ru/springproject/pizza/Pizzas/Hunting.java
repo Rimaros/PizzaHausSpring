@@ -9,7 +9,7 @@ import ru.springproject.pizza.Interfaces.Pizza;
 import java.util.ArrayList;
 
 @Component
-public class Hunting implements Pizza{
+public class Hunting implements Pizza {
 
     private String name; // наименование
     private String doughWidth; // уровень толщины теста wide or thin
@@ -20,11 +20,12 @@ public class Hunting implements Pizza{
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public Hunting huntingPizza(){
+    public Hunting huntingPizza() {
         return new Hunting("Hunting", doughWidth, size, count);
     }
 
-    public Hunting(){}
+    public Hunting() {
+    }
 
     public Hunting(String name, String doughWidth, int size, int count) {
         this.name = name;
@@ -33,25 +34,25 @@ public class Hunting implements Pizza{
         this.count = count;
     }
 
-    public void setDoughWidth(String doughWidth){
+    public void setDoughWidth(String doughWidth) {
         this.doughWidth = doughWidth;
     }
 
-    public void setSize(int pizzaSize){
+    public void setSize(int pizzaSize) {
         this.size = pizzaSize;
     }
 
-    public void setCount(int pizzaCount){
+    public void setCount(int pizzaCount) {
         this.count = pizzaCount;
     }
 
     @Override
-    public void setName(String pizzaName){
+    public void setName(String pizzaName) {
         this.name = pizzaName;
     }
 
     @Override
-    public void setAdditional(String additional){
+    public void setAdditional(String additional) {
         additionals.add(additional);
     }
 
@@ -61,24 +62,24 @@ public class Hunting implements Pizza{
     }
 
     @Override
-    public String getInfo(){
+    public String getInfo() {
         return info;
     }
 
     @Override
-    public void showPizza(){
+    public void showPizza() {
 
         StringBuilder pizzaAdditives = new StringBuilder();
         StringBuilder pizzaMiddleOrder = new StringBuilder();
         String namePizzaForOrder;
 
         pizzaAdditives.append(" with ");
-        for(String additive : additionals){
+        for (String additive : additionals) {
             pizzaAdditives.append(additive).append(", ");
         }
         pizzaAdditives.deleteCharAt(pizzaAdditives.lastIndexOf(", "));
 
-        if(name.contains("_")) namePizzaForOrder = name.split("_")[0];
+        if (name.contains("_")) namePizzaForOrder = name.split("_")[0];
         else namePizzaForOrder = name;
 
         pizzaMiddleOrder.append(count)

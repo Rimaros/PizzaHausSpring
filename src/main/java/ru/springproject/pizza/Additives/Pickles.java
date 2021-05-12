@@ -13,11 +13,12 @@ public class Pickles implements Additive {
     private int cutDegree; // степень измельчения (1 - листами, 2 - кружочками, 3 - кусочками)
 
     @Bean
-    public Pickles picklesPcRound(){
+    public Pickles picklesPcRound() {
         return new Pickles("Pickles", "'Pickles Company ltd.'", 4, 2);
     }
 
-    public Pickles(){}
+    public Pickles() {
+    }
 
     public Pickles(String name, String manufacturer, int sweetnessLevel, int cutDegree) {
         this.name = name;

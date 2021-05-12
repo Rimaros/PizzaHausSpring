@@ -10,11 +10,12 @@ public class Without implements Additive {
     private String name; // наименование
 
     @Bean
-    public Without withOut(){
+    public Without withOut() {
         return new Without("no additives");
     }
 
-    public Without(){}
+    public Without() {
+    }
 
     public Without(String name) {
         this.name = name;

@@ -12,11 +12,12 @@ public class Mayonnaise implements Additive {
     private int type; // тип (1 - стандартный провансаль, 2 - с оливковым)
 
     @Bean
-    public Mayonnaise mayonnaiseAinStandart(){
-        return new Mayonnaise("Mayonnaise","Aintrigud",1);
+    public Mayonnaise mayonnaiseAinStandart() {
+        return new Mayonnaise("Mayonnaise", "Aintrigud", 1);
     }
 
-    public Mayonnaise(){}
+    public Mayonnaise() {
+    }
 
     public Mayonnaise(String name, String manufacturer, int type) {
         this.name = name;

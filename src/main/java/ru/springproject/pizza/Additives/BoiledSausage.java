@@ -13,11 +13,12 @@ public class BoiledSausage implements Additive {
     private int cutDegree; // степень измельчения (1 - кружочками, 2 - кусочками)
 
     @Bean
-    public BoiledSausage boiledSausageDocPieces(){
-        return new BoiledSausage("Boiled sausage","Welcome", "doctor's", 2);
+    public BoiledSausage boiledSausageDocPieces() {
+        return new BoiledSausage("Boiled sausage", "Welcome", "doctor's", 2);
     }
 
-    public BoiledSausage(){}
+    public BoiledSausage() {
+    }
 
     public BoiledSausage(String name, String manufacturer, String kind, int cutDegree) {
         this.name = name;

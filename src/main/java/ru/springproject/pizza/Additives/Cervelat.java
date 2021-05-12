@@ -13,11 +13,12 @@ public class Cervelat implements Additive {
     private int cutDegree; // степень измельчения (1 - кружочками, 2 - кусочками)
 
     @Bean
-    public Cervelat cervelatCognakRound(){
-        return new Cervelat("Cervelat","Welcome", "cognac", 1);
+    public Cervelat cervelatCognakRound() {
+        return new Cervelat("Cervelat", "Welcome", "cognac", 1);
     }
 
-    public Cervelat(){}
+    public Cervelat() {
+    }
 
     public Cervelat(String name, String manufacturer, String kind, int cutDegree) {
         this.name = name;

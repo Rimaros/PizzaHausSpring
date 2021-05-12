@@ -12,11 +12,12 @@ public class Ketchup implements Additive {
     private int spiceLevel; // уровень остроты
 
     @Bean
-    public Ketchup ketchupHeinz(){
-        return new Ketchup("ketchup Heinz","'Heinz'",3);
+    public Ketchup ketchupHeinz() {
+        return new Ketchup("ketchup Heinz", "'Heinz'", 3);
     }
 
-    public Ketchup(){}
+    public Ketchup() {
+    }
 
     public Ketchup(String name, String manufacturer, int sweetnessLevel) {
         this.name = name;
