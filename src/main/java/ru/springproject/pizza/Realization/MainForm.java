@@ -142,12 +142,29 @@ public class MainForm implements Form {
 
         System.out.println("Hello! It is Pizza House!");
 
-        InputStream inputStream = System.in;
-        Reader inputStreamReader = new InputStreamReader(inputStream);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        InputStream inputStream = null;
+        Reader inputStreamReader = null;
+        BufferedReader bufferedReader = null;
 
-        startShow(bufferedReader);
-        finalShow();
+        try {
+            inputStream = System.in;
+            inputStreamReader = new InputStreamReader(inputStream);
+            bufferedReader = new BufferedReader(inputStreamReader);
+
+            startShow(bufferedReader);
+            finalShow();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            try {
+                if(bufferedReader!=null) bufferedReader.close();
+                if(inputStreamReader!=null) inputStreamReader.close();
+                if(inputStream!=null) inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void startShow1(BufferedReader bufferedReader) {
@@ -196,7 +213,7 @@ public class MainForm implements Form {
                 if (enterCount.matches("[0-9]+")) {
                     pizzaCount = Integer.parseInt(enterCount); //преобразовываем строку в число.
                     System.out.println(pizzaCount);
-                    if (pizzaCount > 0 && pizzaCount < 50) pizzaCountFlag = true;
+                    if (pizzaCount > 0 && pizzaCount < 51) pizzaCountFlag = true;
                     else System.out.println("This count is not correctly!\n");
                 } else System.out.println("It is not number, fool!\n");
 
@@ -219,7 +236,7 @@ public class MainForm implements Form {
                 if (enterSize.matches("[0-9]+")) {
                     pizzaSize = Integer.parseInt(enterSize); //преобразовываем строку в число.
                     System.out.println(pizzaSize);
-                    if (pizzaSize > 10 && pizzaSize < 50) pizzaSizeFlag = true;
+                    if (pizzaSize > 10 && pizzaSize < 51) pizzaSizeFlag = true;
                     else System.out.println("This size is not correctly!\n");
                 } else System.out.println("It is not pizza size, fool!\n");
 
@@ -343,7 +360,10 @@ public class MainForm implements Form {
                 enterAdditives = bufferedReader.readLine(); //читаем строку с клавиатуры
                 if (enterAdditives.matches("[0-9]") || enterAdditives.contains(";")) {
 
-                    if (enterAdditives.contains("0;") || enterAdditives.contains(";0") || (enterAdditives.contains("0") & enterAdditives.length() == 1)) {
+                    if (enterAdditives.contains("0;") ||
+                            enterAdditives.contains(";0") ||
+                            (enterAdditives.contains("0") &
+                                    enterAdditives.length() == 1)) {
                         enterAdditives = enterAdditives.replaceAll("[^0]", "");
                     }
 
