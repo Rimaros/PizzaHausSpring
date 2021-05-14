@@ -1,12 +1,11 @@
-package ru.springproject.pizza.Additives;
+package ru.springproject.pizza.additives;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import ru.springproject.pizza.Interfaces.Additive;
+import ru.springproject.pizza.interfaces.Additive;
 
 @Component
 public class Olives implements Additive {
-
     private String name; // наименование
     private String color; // зеленый черный
     private String manufacturer; // производитель Greek, Cyprus, Spain
@@ -31,9 +30,9 @@ public class Olives implements Additive {
 
     @Override
     public void takeAdditive() {
-
-        StringBuilder finalAdditive = new StringBuilder();
-        finalAdditive.append("take additional ")
+        // можно сделать через ту стринг(но это похоже на логику, а логику лучше не писать в ту стринге, можно через
+        // и можно через System.out.printf(
+        StringBuilder finalAdditive = new StringBuilder("take additional ")
                 .append(color)
                 .append(" ")
                 .append(name)

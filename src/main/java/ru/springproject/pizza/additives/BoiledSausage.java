@@ -1,8 +1,8 @@
-package ru.springproject.pizza.Additives;
+package ru.springproject.pizza.additives;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import ru.springproject.pizza.Interfaces.Additive;
+import ru.springproject.pizza.interfaces.Additive;
 
 @Component
 public class BoiledSausage implements Additive {
