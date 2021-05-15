@@ -1,28 +1,27 @@
-package ru.springproject.pizza.Additives;
+package ru.springproject.pizza.additives;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import ru.springproject.pizza.Interfaces.Additive;
+import ru.springproject.pizza.interfaces.Additive;
 
 @Component
-public class Ketchup implements Additive {
-
+public class JalapenaPepper implements Additive {
     private String name; // наименование
-    private String manufacturer; // производитель Heinz Baltimor
+    private String manufacturer; // производитель США / мексика
     private int spiceLevel; // уровень остроты
 
     @Bean
-    public Ketchup ketchupHeinz() {
-        return new Ketchup("ketchup Heinz", "'Heinz'", 3);
+    public JalapenaPepper jalapenaPepperUsa() {
+        return new JalapenaPepper("Jalapena pepper", "USA Company", 7);
     }
 
-    public Ketchup() {
+    public JalapenaPepper() {
     }
 
-    public Ketchup(String name, String manufacturer, int sweetnessLevel) {
+    public JalapenaPepper(String name, String manufacturer, int spiceLevel) {
         this.name = name;
         this.manufacturer = manufacturer;
-        this.spiceLevel = sweetnessLevel;
+        this.spiceLevel = spiceLevel;
     }
 
     public String getName() {
@@ -30,8 +29,8 @@ public class Ketchup implements Additive {
     }
 
     @Override
-    public void takeAdditive() {
-
+    public void takeAdditive() { // можно сделать через ту стринг(но это похоже на логику, а логику лучше не писать в ту стринге, можно через
+        // и можно через System.out.printf(
         StringBuilder finalAdditive = new StringBuilder();
         finalAdditive.append("take additional ")
                 .append(name)

@@ -1,16 +1,16 @@
-package ru.springproject.pizza.Pizzas;
+package ru.springproject.pizza.pizzas;
 
+import com.sun.deploy.util.StringUtils;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import ru.springproject.pizza.Interfaces.Pizza;
+import ru.springproject.pizza.interfaces.Pizza;
 
 import java.util.ArrayList;
 
 @Component
 public class Meat implements Pizza {
-
     private String name; // наименование
     private String doughWidth; // уровень толщины теста wide or thin
     private int size; // размер пиццы
@@ -67,45 +67,37 @@ public class Meat implements Pizza {
     }
 
     @Override
-    public void showPizza() {
-
-        StringBuilder pizzaAdditives = new StringBuilder();
+    public void showPizza() { // и тут бы я сделал через форматирование а не через Builder
         StringBuilder pizzaMiddleOrder = new StringBuilder();
-        String namePizzaForOrder;
-
-        pizzaAdditives.append(" with ");
-        for (String additive : additionals) {
-            pizzaAdditives.append(additive).append(", ");
-        }
-        pizzaAdditives.deleteCharAt(pizzaAdditives.lastIndexOf(", "));
-
-        if (name.contains("_")) namePizzaForOrder = name.split("_")[0];
-        else namePizzaForOrder = name;
 
         pizzaMiddleOrder.append(count)
                 .append(" ")
-                .append(namePizzaForOrder)
+                .append(name.contains("_") ?
+                        name.split("_")[0] : name)
                 .append(" pizza with size ")
                 .append(size)
                 .append(" , dough width ")
                 .append(doughWidth)
-                .append(pizzaAdditives);
+                .append(" with ")
+                .append(StringUtils.join(additionals, ", "));
 
         info = pizzaMiddleOrder.toString();
     }
 
     @Override
-    public void takePizza() {
-
-        StringBuilder finalAdditive = new StringBuilder();
-        finalAdditive.append("You change Pizza ")
-                .append(name)
-                .append(" with dough width level: ")
-                .append(doughWidth)
-                .append(" and size ")
-                .append(size)
-                .append(".\n");
-
-        System.out.println(finalAdditive.toString());
+    public void takePizza() { // делать через систем.аут.принтФ()... пример написал но не проверял, протестируй
+//        String finalAdditive = "You change Pizza " +
+//                name +
+//                " with dough width level: " +
+//                doughWidth +
+//                " and size " +
+//                size +
+//                ".\n";
+//        System.out.println(finalAdditive);
+        System.out.printf(
+                "You change Pizza %s with dough width level: %s and size %d",
+                name,
+                doughWidth,
+                size);
     }
 }

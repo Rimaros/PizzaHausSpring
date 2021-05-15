@@ -1,4 +1,4 @@
-package ru.springproject.pizza.Interfaces;
+package ru.springproject.pizza.interfaces;
 
 public interface Pizza {
 

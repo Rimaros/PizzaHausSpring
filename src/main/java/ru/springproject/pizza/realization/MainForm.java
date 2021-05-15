@@ -1,22 +1,20 @@
-package ru.springproject.pizza.Realization;
+package ru.springproject.pizza.realization;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import ru.springproject.pizza.Additives.*;
-import ru.springproject.pizza.Interfaces.Form;
-import ru.springproject.pizza.Pizzas.Carbonara;
-import ru.springproject.pizza.Pizzas.Hunting;
-import ru.springproject.pizza.Pizzas.Margarita;
-import ru.springproject.pizza.Pizzas.Meat;
-import ru.springproject.pizza.Pools.Pizzas;
+import ru.springproject.pizza.additives.*;
+import ru.springproject.pizza.interfaces.Form;
+import ru.springproject.pizza.pizzas.Carbonara;
+import ru.springproject.pizza.pizzas.Hunting;
+import ru.springproject.pizza.pizzas.Margarita;
+import ru.springproject.pizza.pizzas.Meat;
+import ru.springproject.pizza.pools.Pizzas;
 
 import java.io.*;
-import java.util.ArrayList;
 
 @Component
 public class MainForm implements Form {
-
     //Additives
 
     private BellPepper bellPepperMex;
@@ -31,25 +29,21 @@ public class MainForm implements Form {
     private Without withOut;
 
     // Pizzas
-
     private Carbonara carbonaraPizza;
     private Hunting huntingPizza;
     private Margarita margaritaPizza;
     private Meat meatPizza;
 
     // Pizzas Pool
-
     private Pizzas listPizzas;
 
     // Pizzas parameters
-
     private String enterDoughWidth;
     private int pizzaSize;
     private String pizzaName;
     private int pizzaCount;
 
     // Autowired's of Additives
-
     @Autowired
     public void setBellPepper(BellPepper bellPepperMex) {
         this.bellPepperMex = bellPepperMex;
@@ -101,7 +95,6 @@ public class MainForm implements Form {
     }
 
     // Autowired's of Pizzas
-
     @Autowired
     public void setCarbonara(Carbonara carbonaraPizza) {
         this.carbonaraPizza = carbonaraPizza;
@@ -123,7 +116,6 @@ public class MainForm implements Form {
     }
 
     // Autowired's of Pools
-
     @Autowired
     public void setPizzaPool(Pizzas listPizzas) {
         this.listPizzas = listPizzas;
@@ -139,52 +131,37 @@ public class MainForm implements Form {
 
     @Override
     public void show() {
-
         System.out.println("Hello! It is Pizza House!");
 
-        InputStream inputStream = null;
-        Reader inputStreamReader = null;
-        BufferedReader bufferedReader = null;
-
-        try {
-            inputStream = System.in;
-            inputStreamReader = new InputStreamReader(inputStream);
-            bufferedReader = new BufferedReader(inputStreamReader);
-
+        try (Reader inputStreamReader = new InputStreamReader(System.in);
+             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)
+        ) {
             startShow(bufferedReader);
             finalShow();
-
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if(bufferedReader!=null) bufferedReader.close();
-                if(inputStreamReader!=null) inputStreamReader.close();
-                if(inputStream!=null) inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
     private void startShow1(BufferedReader bufferedReader) {
-
     }
 
     private void startShow(BufferedReader bufferedReader) {
-
         String orderWord;
-        boolean orderFlag = false;
-        boolean orderRepeat = false;
+        boolean orderFlag = Boolean.FALSE;
+        boolean orderRepeat = Boolean.FALSE;
 
         while (!orderFlag) {
-            if (orderRepeat) System.out.println("Add Pizza to Order? (yes or no)");
-            else System.out.println("Would you like take a pizza? (yes or no)");
+            if (orderRepeat) {
+                System.out.println("Add Pizza to Order? (yes or no)");
+            } else {
+                System.out.println("Would you like take a pizza? (yes or no)");
+            }
 
             try {
                 orderWord = bufferedReader.readLine(); //читаем строку с клавиатуры
-                if (orderWord.equalsIgnoreCase("yes")) {
-                    orderRepeat = true;
+                if ("yes".equalsIgnoreCase(orderWord)) {
+                    orderRepeat = Boolean.TRUE;
 
                     checkCount(bufferedReader);
                     checkSize(bufferedReader);
@@ -192,9 +169,11 @@ public class MainForm implements Form {
                     checkType(bufferedReader);
                     checkAdditives(bufferedReader);
 
-                } else if (orderWord.equalsIgnoreCase("no")) {
-                    orderFlag = true;
-                } else System.out.println("Please change from 'yes' or 'no'!\n");
+                } else if ("no".equalsIgnoreCase(orderWord)) {
+                    orderFlag = Boolean.TRUE;
+                } else {
+                    System.out.println("Please change from 'yes' or 'no'!\n");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -203,7 +182,7 @@ public class MainForm implements Form {
 
     private void checkCount(BufferedReader bufferedReader) {
         String enterCount;
-        boolean pizzaCountFlag = false;
+        boolean pizzaCountFlag = Boolean.FALSE;
 
         while (!pizzaCountFlag) {
             System.out.println("Enter the number of pizzas (1-50):");
@@ -213,10 +192,14 @@ public class MainForm implements Form {
                 if (enterCount.matches("[0-9]+")) {
                     pizzaCount = Integer.parseInt(enterCount); //преобразовываем строку в число.
                     System.out.println(pizzaCount);
-                    if (pizzaCount > 0 && pizzaCount < 51) pizzaCountFlag = true;
-                    else System.out.println("This count is not correctly!\n");
-                } else System.out.println("It is not number, fool!\n");
-
+                    if (pizzaCount > 0 && pizzaCount < 51){
+                        pizzaCountFlag = Boolean.TRUE;
+                    } else {
+                        System.out.println("This count is not correctly!\n");
+                    }
+                } else {
+                    System.out.println("It is not number, fool!\n");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -224,9 +207,8 @@ public class MainForm implements Form {
     }
 
     private void checkSize(BufferedReader bufferedReader) {
-
         String enterSize;
-        boolean pizzaSizeFlag = false;
+        boolean pizzaSizeFlag = Boolean.FALSE;
 
         while (!pizzaSizeFlag) {
             System.out.println("Enter size of Pizza (10-50 sm):");
@@ -236,11 +218,14 @@ public class MainForm implements Form {
                 if (enterSize.matches("[0-9]+")) {
                     pizzaSize = Integer.parseInt(enterSize); //преобразовываем строку в число.
                     System.out.println(pizzaSize);
-                    if (pizzaSize > 10 && pizzaSize < 51) pizzaSizeFlag = true;
-                    else System.out.println("This size is not correctly!\n");
-                } else System.out.println("It is not pizza size, fool!\n");
-
-
+                    if (pizzaSize > 10 && pizzaSize < 51) {
+                        pizzaSizeFlag = Boolean.TRUE;
+                    } else {
+                        System.out.println("This size is not correctly!\n");
+                    }
+                } else {
+                    System.out.println("It is not pizza size, fool!\n");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -248,19 +233,19 @@ public class MainForm implements Form {
     }
 
     private void checkDoughWidth(BufferedReader bufferedReader) {
-
-        boolean pizzaDoughWidthFlag = false;
+        boolean pizzaDoughWidthFlag = Boolean.FALSE;
 
         while (!pizzaDoughWidthFlag) {
             System.out.println("Enter dough width of Pizza (wide or thin):");
 
             try {
                 enterDoughWidth = bufferedReader.readLine(); //читаем строку с клавиатуры
-                if (enterDoughWidth.equalsIgnoreCase("wide") || enterDoughWidth.equalsIgnoreCase("thin")) {
+                if ("wide".equalsIgnoreCase(enterDoughWidth) || "thin".equalsIgnoreCase(enterDoughWidth)) {
                     System.out.println(enterDoughWidth);
-                    pizzaDoughWidthFlag = true;
-                } else System.out.println("Please change from 'wide' or 'thin'!\n");
-
+                    pizzaDoughWidthFlag = Boolean.TRUE;
+                } else {
+                    System.out.println("Please change from 'wide' or 'thin'!\n");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -268,10 +253,9 @@ public class MainForm implements Form {
     }
 
     private void checkType(BufferedReader bufferedReader) {
-
         String enterType;
         int changeType;
-        boolean pizzaTypeFlag = false;
+        boolean pizzaTypeFlag = Boolean.FALSE;
 
         while (!pizzaTypeFlag) {
             System.out.println("Enter type of Pizza (1-4):");
@@ -288,6 +272,15 @@ public class MainForm implements Form {
 
                     switch (changeType) {
                         case 1:
+// это надо переписать!
+// т.к. каждый case делает ОДНО И Т ОЖЕ!
+// ты можешь это дело вынести в отдельный метод и вызывать его в case с параметром "конкретный клас"
+                            // private Pizza pizza(Pizza pizza);
+                            // carbonaraPizza = preparePizza(carbonaraPizza.carbonaraPizza());
+                            // в общем, должен быть только вызов одного метода, и написанный он должен быть:
+                            // либо через интерфейс Pizza
+                            // либо через дженерик
+                            // смотри как тебе приятнее повыпендриваться
                             carbonaraPizza = carbonaraPizza.carbonaraPizza();
                             carbonaraPizza.setDoughWidth(enterDoughWidth);
                             carbonaraPizza.setSize(pizzaSize);
@@ -327,9 +320,8 @@ public class MainForm implements Form {
                             System.out.println("This type of pizza lost!");
                             break;
                     }
-                    pizzaTypeFlag = true;
+                    pizzaTypeFlag = Boolean.TRUE;
                 } else System.out.println(enterType + " is not correctly type!\n");
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -337,10 +329,9 @@ public class MainForm implements Form {
     }
 
     private void checkAdditives(BufferedReader bufferedReader) {
-
         String enterAdditives;
         String[] masEnterAdditives;
-        boolean pizzaTypeFlag = false;
+        boolean pizzaTypeFlag = Boolean.FALSE;
         String additiveName = "";
 
         while (!pizzaTypeFlag) {
@@ -360,15 +351,16 @@ public class MainForm implements Form {
                 enterAdditives = bufferedReader.readLine(); //читаем строку с клавиатуры
                 if (enterAdditives.matches("[0-9]") || enterAdditives.contains(";")) {
 
-                    if (enterAdditives.contains("0;") ||
-                            enterAdditives.contains(";0") ||
-                            (enterAdditives.contains("0") &
-                                    enterAdditives.length() == 1)) {
+                    if (enterAdditives.contains("0;") || enterAdditives.contains(";0") ||
+                            (enterAdditives.contains("0") & enterAdditives.length() == 1)) {
                         enterAdditives = enterAdditives.replaceAll("[^0]", "");
                     }
 
-                    if (!enterAdditives.contains(";")) masEnterAdditives = new String[]{enterAdditives};
-                    else masEnterAdditives = enterAdditives.split(";");
+                    if (!enterAdditives.contains(";")) {
+                        masEnterAdditives = new String[]{enterAdditives};
+                    } else {
+                        masEnterAdditives = enterAdditives.split(";");
+                    }
 
                     for (String masEnterAdditivesElement : masEnterAdditives) {
                         switch (masEnterAdditivesElement) {
@@ -418,9 +410,10 @@ public class MainForm implements Form {
                         }
                         listPizzas.getPizzaList().get(pizzaName).setAdditional(additiveName);
                     }
-                    pizzaTypeFlag = true;
-                } else System.out.println(enterAdditives + " is not correctly enter!\n");
-
+                    pizzaTypeFlag = Boolean.TRUE;
+                } else {
+                    System.out.println(enterAdditives + " is not correctly enter!\n");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -428,19 +421,25 @@ public class MainForm implements Form {
     }
 
     private void finalShow() {
-        StringBuilder pizzaOrder = new StringBuilder();
+        StringBuilder pizzaOrder = new StringBuilder("\nYour order : \n\t");
 
-        pizzaOrder.append("\nYour order : \n\t");
-
-        if (listPizzas.getPizzaList().isEmpty()) pizzaOrder.append("nothing");
-        else {
-
+        if (listPizzas.getPizzaList().isEmpty()) {
+            pizzaOrder.append("nothing");
+        } else {
             listPizzas.show();
-            for (String pizzaOrderString : listPizzas.getPizzaList().keySet()) {
-                pizzaOrder.append(listPizzas.getPizzaList().get(pizzaOrderString).getInfo())
+//            for (String pizzaOrderString : listPizzas.getPizzaList().keySet()) {
+//                pizzaOrder.append(listPizzas.getPizzaList().get(pizzaOrderString).getInfo())
+//                        .append("; \n\t");
+//            }
+            listPizzas.getPizzaList()
+                    .forEach((pizzaOrderString, pizza) -> {
+                pizzaOrder
+                        .append(pizza.getInfo())
                         .append("; \n\t");
-            }
-            pizzaOrder.replace(pizzaOrder.lastIndexOf(";"), pizzaOrder.lastIndexOf(";") + 1, ".");
+            });
+            pizzaOrder.replace(pizzaOrder.lastIndexOf(";"),
+                    pizzaOrder.lastIndexOf(";") + 1,
+                    ".");
         }
         System.out.println(pizzaOrder.toString());
     }

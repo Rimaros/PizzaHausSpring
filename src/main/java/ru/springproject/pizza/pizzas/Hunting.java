@@ -1,10 +1,10 @@
-package ru.springproject.pizza.Pizzas;
+package ru.springproject.pizza.pizzas;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import ru.springproject.pizza.Interfaces.Pizza;
+import ru.springproject.pizza.interfaces.Pizza;
 
 import java.util.ArrayList;
 
@@ -67,7 +67,7 @@ public class Hunting implements Pizza {
     }
 
     @Override
-    public void showPizza() {
+    public void showPizza() { // сделать по аналогии с мясной и Meat
 
         StringBuilder pizzaAdditives = new StringBuilder();
         StringBuilder pizzaMiddleOrder = new StringBuilder();
@@ -96,7 +96,7 @@ public class Hunting implements Pizza {
 
 
     @Override
-    public void takePizza() {
+    public void takePizza() {// сделать по аналогии с мясной и Meat
 
         StringBuilder finalAdditive = new StringBuilder();
         finalAdditive.append("You change Pizza ")

@@ -1,12 +1,11 @@
-package ru.springproject.pizza.Additives;
+package ru.springproject.pizza.additives;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import ru.springproject.pizza.Interfaces.Additive;
+import ru.springproject.pizza.interfaces.Additive;
 
 @Component
 public class Mayonnaise implements Additive {
-
     private String name; // наименование Московский провансаль(Moscow provencal)  Ряба(Ryaba)
     private String manufacturer; // производитель Moscow Fat Factory (Moscow provencal) / Aintrigud (Ryaba)
     private int type; // тип (1 - стандартный провансаль, 2 - с оливковым)
@@ -30,8 +29,8 @@ public class Mayonnaise implements Additive {
     }
 
     @Override
-    public void takeAdditive() {
-
+    public void takeAdditive() {// можно сделать через ту стринг(но это похоже на логику, а логику лучше не писать в ту стринге, можно через
+        // и можно через System.out.printf(
         StringBuilder finalAdditive = new StringBuilder();
         finalAdditive.append("take additional ")
                 .append(name)
