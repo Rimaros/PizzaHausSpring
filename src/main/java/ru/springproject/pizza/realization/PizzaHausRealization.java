@@ -9,10 +9,10 @@ public class PizzaHausRealization {
 //                .getBean("form1")
 //                .show();
 
-//        ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-//        (MainForm) context
-//                .getBean("form1")
-//                .show();
+        ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+        (MainForm) context
+                .getBean("form1")
+                .show();
 
 //        ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 //        MainForm form1 = (MainForm) context.getBean("form1");
