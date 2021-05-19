@@ -5,15 +5,13 @@ import org.springframework.stereotype.Component;
 import ru.springproject.pizza.interfaces.Additive;
 
 @Component
-public class BellPepper implements Additive {
+public class BellPepper extends BaseAdditive implements Additive {
 
-    private String name; // наименование
     private String color; // зеленый красный желтый
-    private String manufacturer; // производитель
     private int sweetnessLevel; // уровень сладости
 
     @Bean
-    public BellPepper bellPepperMex() {
+    public BaseAdditive bellPepperMex() {
         return new BellPepper("Bell pepper", "red", "MexCompany", 4);
     }
 

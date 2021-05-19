@@ -5,10 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import ru.springproject.pizza.additives.*;
 import ru.springproject.pizza.interfaces.Form;
-import ru.springproject.pizza.pizzas.Carbonara;
-import ru.springproject.pizza.pizzas.Hunting;
-import ru.springproject.pizza.pizzas.Margarita;
-import ru.springproject.pizza.pizzas.Meat;
+import ru.springproject.pizza.interfaces.Pizza;
+import ru.springproject.pizza.pizzas.*;
 import ru.springproject.pizza.pools.Pizzas;
 
 import java.io.*;
@@ -266,62 +264,18 @@ public class MainForm implements Form {
 
             try {
                 enterType = bufferedReader.readLine(); //читаем строку с клавиатуры
-                if (enterType.matches("[1-4]")) {
                     changeType = Integer.parseInt(enterType); //преобразовываем строку в число.
                     System.out.println(changeType);
+                    Pizza pizza = PizzaTypeEnum.getPizzaByCode(changeType);
+                    pizza.setCount(pizzaCount);
+                    pizza.setSize(pizzaSize);
+                    pizza.setDoughWith(enterDoughWidth);
 
-                    switch (changeType) {
-                        case 1:
-// это надо переписать!
-// т.к. каждый case делает ОДНО И Т ОЖЕ!
-// ты можешь это дело вынести в отдельный метод и вызывать его в case с параметром "конкретный клас"
-                            // private Pizza pizza(Pizza pizza);
-                            // carbonaraPizza = preparePizza(carbonaraPizza.carbonaraPizza());
-                            // в общем, должен быть только вызов одного метода, и написанный он должен быть:
-                            // либо через интерфейс Pizza
-                            // либо через дженерик
-                            // смотри как тебе приятнее повыпендриваться
-                            carbonaraPizza = carbonaraPizza.carbonaraPizza();
-                            carbonaraPizza.setDoughWidth(enterDoughWidth);
-                            carbonaraPizza.setSize(pizzaSize);
-                            carbonaraPizza.setCount(pizzaCount);
-                            listPizzas.setPizza(carbonaraPizza);
-                            carbonaraPizza.takePizza();
-                            pizzaName = carbonaraPizza.getName();
-                            break;
-                        case 2:
-                            huntingPizza = huntingPizza.huntingPizza();
-                            huntingPizza.setDoughWidth(enterDoughWidth);
-                            huntingPizza.setSize(pizzaSize);
-                            huntingPizza.setCount(pizzaCount);
-                            listPizzas.setPizza(huntingPizza);
-                            huntingPizza.takePizza();
-                            pizzaName = huntingPizza.getName();
-                            break;
-                        case 3:
-                            margaritaPizza = margaritaPizza.margaritaPizza();
-                            margaritaPizza.setDoughWidth(enterDoughWidth);
-                            margaritaPizza.setSize(pizzaSize);
-                            margaritaPizza.setCount(pizzaCount);
-                            listPizzas.setPizza(margaritaPizza);
-                            margaritaPizza.takePizza();
-                            pizzaName = margaritaPizza.getName();
-                            break;
-                        case 4:
-                            meatPizza = meatPizza.meatPizza();
-                            meatPizza.setDoughWidth(enterDoughWidth);
-                            meatPizza.setSize(pizzaSize);
-                            meatPizza.setCount(pizzaCount);
-                            listPizzas.setPizza(meatPizza);
-                            meatPizza.takePizza();
-                            pizzaName = meatPizza.getName();
-                            break;
-                        default:
-                            System.out.println("This type of pizza lost!");
-                            break;
-                    }
+                    pizzaName = pizza.getName();
+                    pizza.takePizza();
+                    //FIXME: WTF
+                    listPizzas.setPizza(pizza);
                     pizzaTypeFlag = Boolean.TRUE;
-                } else System.out.println(enterType + " is not correctly type!\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }

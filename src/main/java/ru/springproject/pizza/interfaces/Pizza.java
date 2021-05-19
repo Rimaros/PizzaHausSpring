@@ -13,4 +13,10 @@ public interface Pizza {
     void showPizza();
 
     void takePizza();
+
+    void setCount(int pizzaCount);
+
+    void setSize(int pizzaSize);
+
+    void setDoughWith(String enterDoughWidth);
 }
